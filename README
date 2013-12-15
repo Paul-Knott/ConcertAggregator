@@ -1,0 +1,23 @@
+
+
+Concert Video Aggregator
+---------------------------
+
+A PHP/jQuery site that finds and sorts concert videos by song,city & date and creates a fully automated playlist.
+
+
+//////////////////////////////////////////////////
+
+File Structure:
+
+        protected               // folder outside web dir
+        - /concertaggregator    // unique identifiable folder for this site
+            - /classes          // php classes
+            - /templates        // html/php templates
+        public                  // root of web dir
+        - /ajax                 // pages accessed via ajax
+        - /css                  // css files
+        - /img                  // image files
+        - /js                   // javascript files
+
+////////////////////////////////////////////////////
