@@ -20,7 +20,6 @@ $page = new page();
 if($session->isLoggedIn())
 {
     $db = new db();
-    $db->query();
     $user = new user($session,$db);
     $site->setUser($user);
 }
