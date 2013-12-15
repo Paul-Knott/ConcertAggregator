@@ -18,22 +18,22 @@ if(isset($_POST["form"]))
     $auth = new auth($db,$session);
 
     // get required data
-    $function = $_POST["form"];
+    $action = $_POST["form"];
     $email = $_POST["email"];
     $password = $_POST["password"];
 
     // authenticate
-    switch($_POST["form"])
+    switch($action)
     {
         case "login"    : $submit = $auth->login($email,$password); break;
-        case "register" : $submit = $auth->register($email,$password); break;
+        case "register" : $submit = $auth->register($email,$password); $action = "registration"; break;
         case "logout"   : $submit = $auth->logout(); break;
         default         : $submit = false;
     }
 
     if($submit)
     {
-        $session->alert("success",ucfirst($function)." Successful");
+        $session->alert("success",ucfirst($action)." Successful");
         exit("1");
     }
     else
