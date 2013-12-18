@@ -10,6 +10,8 @@
 
 // constant vars
 require_once "constants.php";
+// forward compatibility with php 5.5 password api
+require_once "password.php";
 
 function __autoload($class)
 {

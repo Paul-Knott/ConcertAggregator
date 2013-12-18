@@ -96,8 +96,12 @@ function playVideo(vid) {
  ***********************************************/
 function setResultBar(num,list) {
 
-    $("#loading").html('<div class="row"><div class="col-xs-10 loading"><b>'+num+'</b> Videos Sorted By '+list+'</div><div class="col-xs-2"><span id="sort" list="'+list+'" class="glyphicon glyphicon-retweet"></span></div></div><b>');
-
+    if(num > 0) {
+        $("#loading").html('<div class="row"><div class="col-xs-10 loading"><b>'+num+'</b> Videos Sorted By '+list+'</div><div class="col-xs-2"><span id="sort" list="'+list+'" class="glyphicon glyphicon-retweet"></span></div></div><b>');
+    }
+    else {
+        $("#loading").html('<div class="row"><div class="col-xs-10 loading">No Videos Found in Database</div><div class="col-xs-2"></div></div>');
+    }
 }
 
 

@@ -17,6 +17,7 @@
      {
          $this->db = $db;
          $this->session = $session;
+
      }
 
      /**
@@ -30,7 +31,7 @@
          $email = trim($email);
          $password = trim($password);
 
-         if (empty($email) || empty($password))
+         if(empty($email) || empty($password))
          {
              error("You must provide your email and password");
          }
@@ -38,13 +39,14 @@
          {
              // query database for user
              $rows = $this->db->query("SELECT * FROM users WHERE email = ?", strtolower($email));
+
              // if we found user, check password
-             if (count($rows) == 1)
+             if(count($rows) == 1)
              {
                  $row = $rows[0];
 
                  // if hash is correct, set session id
-                 if (crypt($password, $row["hash"]) == $row["hash"])
+                 if(password_verify($password, $row["hash"]))
                  {
                      $this->session->auth($row["id"]);
                      return true;
@@ -85,7 +87,7 @@
          $email = trim($email);
          $password = trim($password);
 
-         if (empty($email) || empty($password))
+         if(empty($email) || empty($password))
          {
              error("You must provide an email and password");
          }
@@ -96,10 +98,13 @@
 
              if($validEmail && $validPassword)
              {
-                 // salt password
-                 $hash = crypt($password);
+                 $hash = password_hash($password, PASSWORD_DEFAULT);
+                 if(!$hash)
+                 {
+                     error("Error inserting Password into Database");
+                     exit;
+                 }
 
-                 // insert into DB
                  $result = $this->db->query("INSERT INTO users (email,hash) VALUES(?,?)",strtolower($email),$hash);
                  if($result === false)
                  {
